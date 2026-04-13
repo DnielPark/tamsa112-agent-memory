@@ -25,7 +25,7 @@ SKILLS_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
 import sys,json
 data=json.load(sys.stdin)
 for item in data:
-    if item['type'] == 'file' and (item['name'].endswith('.md') or item['name'].endswith('.py')):
+    if item['type'] == 'file' and (item['name'].endswith('.md') or item['name'].endswith('.py') or item['name'].endswith('.sh')):
         print('skills/' + item['name'])
 " 2>/dev/null || echo "")
 
@@ -51,34 +51,32 @@ TOTAL_LINES=0
 # 각 파일 다운로드
 for relative_path in "${FILES_TO_DOWNLOAD[@]}"; do
     filename=$(basename "$relative_path")
-    
-    # 로컬 저장 경로 결정
-    if [[ "$relative_path" == skills/* ]]; then
-        local_file="$HOME/.openclaw/workspace/$relative_path"
-    else
-        local_file="$HOME/.openclaw/workspace/$relative_path"
-    fi
-    
+    local_file="$HOME/.openclaw/workspace/$relative_path"
+
     # 디렉토리 생성
     mkdir -p "$(dirname "$local_file")"
-    
+
     echo "다운로드 중: $relative_path"
     echo "  → $local_file"
-    
+
     # GitHub에서 파일 다운로드
     if curl -s -H "Authorization: token $GITHUB_TOKEN" \
         -H "Accept: application/vnd.github.v3.raw" \
         -o "$local_file" \
         "$RAW_BASE/$relative_path" 2>/dev/null; then
-        
-        # 파일 정보 확인
+
         if [ -s "$local_file" ]; then
             file_size=$(wc -c < "$local_file" | tr -d ' ')
             file_lines=$(wc -l < "$local_file" | tr -d ' ')
             TOTAL_SIZE=$((TOTAL_SIZE + file_size))
             TOTAL_LINES=$((TOTAL_LINES + file_lines))
-            
-            echo "  ✅ 성공 (    $file_size bytes,      $file_lines lines)"
+
+            # .sh 파일 실행 권한 부여
+            if [[ "$local_file" == *.sh ]]; then
+                chmod +x "$local_file"
+            fi
+
+            echo "  ✅ 성공 ($file_size bytes, $file_lines lines)"
             ((SUCCESS++))
         else
             echo "  ⚠️  경고: 빈 파일"
@@ -94,27 +92,6 @@ echo ""
 echo "=== 다운로드 완료 ==="
 echo "성공: $SUCCESS 파일"
 echo "실패: $FAILED 파일"
-echo ""
-
-# 저장된 파일 목록 출력
-echo "=== 저장된 파일 목록 ==="
-for relative_path in "${FILES_TO_DOWNLOAD[@]}"; do
-    if [[ "$relative_path" == skills/* ]]; then
-        local_file="$HOME/.openclaw/workspace/$relative_path"
-    else
-        local_file="$HOME/.openclaw/workspace/$relative_path"
-    fi
-    
-    if [ -f "$local_file" ]; then
-        file_size=$(wc -c < "$local_file" | tr -d ' ')
-        file_lines=$(wc -l < "$local_file" | tr -d ' ')
-        printf "%-30s %10s bytes %8s lines\n" "$relative_path" "$file_size" "$file_lines"
-    fi
-done
-
-echo ""
-echo "총 파일 수:        $SUCCESS"
-echo "총 용량: $(numfmt --to=iec $TOTAL_SIZE)"
 echo "총 줄 수: $TOTAL_LINES"
 echo ""
 
