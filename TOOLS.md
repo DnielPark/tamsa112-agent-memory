@@ -23,9 +23,14 @@ Skills define _how_ tools work. This file is for _your_ specifics — the stuff 
 - **스킬 위치**: `./skills/amazon-server.md`
 
 ### GitHub 워크플로우
-- **설명**: 맥북 ↔️ GitHub ↔️ 서버 간 파일 동기화 표준 워크플로우. 서버 직접 수정 금지.
+- **설명**: 맥북 ↔ GitHub ↔ 서버 간 파일 동기화 표준 워크플로우. 서버 직접 수정 금지.
 - **사용 시기**: 코드 수정, 서버 배포, 파일 동기화 작업 시
 - **스킬 위치**: `./skills/github-workflow.md`
+
+### 서버 파일 수정 워크플로우
+- **설명**: 서버 파일 수정 시 담당자 판단 기준, Claude 컨펌 절차, 배포 안전 규칙. 모든 배포는 Claude 컨펌 후에만 진행.
+- **사용 시기**: 서버 파일 수정 요청이 있을 때 반드시 먼저 읽을 것
+- **스킬 위치**: `./skills/code-edit.md`
 
 ### 텔레그램 파일 전송
 - **설명**: 파일 내용을 텔레그램으로 전송하는 스크립트. 긴 파일은 자동 분할 전송.
@@ -54,10 +59,11 @@ python3 ~/.openclaw/workspace/skills/send_to_telegram.py MEMORY.md TOOLS.md
 ### GitHub 워크플로우 (항상 이 순서)
 ```bash
 cd ~/.openclaw/workspace/skills
-./github-pull.sh # 1. 작업 시작 전
-# 코드 수정 # 2. github-workspace/ 안에서
-./github-push.sh "설명" # 3. 수정 완료 후
-./deploy.sh # 4. 서버 배포
+./github-pull.sh          # 1. 작업 시작 전
+# 코드 수정               # 2. github-workspace/ 안에서
+./github-push.sh "설명"   # 3. 수정 완료 후
+# Claude 컨펌             # 4. 대니얼이 코드 공유 → Claude 검토
+./deploy.sh               # 5. 컨펌 후 배포
 ```
 
 ### 아마존 서버 SSH 접속
@@ -68,7 +74,7 @@ ssh -i ~/.ssh/my-key1.pem admin@43.200.251.19
 ### 서버 상태 확인
 ```bash
 ssh -i ~/.ssh/my-key1.pem admin@43.200.251.19 \
- "sudo systemctl status nginx | head -3 && pm2 list"
+  "sudo systemctl status nginx | head -3 && pm2 list"
 ```
 
 ---
@@ -80,18 +86,19 @@ ssh -i ~/.ssh/my-key1.pem admin@43.200.251.19 \
 ├── TOOLS.md — 인덱스 (이 파일)
 ├── MEMORY.md — 장기 기억
 └── skills/
- ├── web-search.md — 웹 검색 API
- ├── novel-brain.md — 소설 보조작가
- ├── amazon-server.md — 아마존 서버 정보
- ├── github-workflow.md — GitHub 배포 워크플로우
- ├── github-pull.sh — GitHub → 맥북 (서버 코드)
- ├── github-push.sh — 맥북 → GitHub (서버 코드)
- ├── agent-pull.sh — GitHub → 맥북 (메모리 파일)
- ├── agent-push.sh — 맥북 → GitHub (메모리 파일)
- ├── deploy.sh — GitHub → 서버 배포
- ├── send_to_telegram.py — 텔레그램 파일 전송
- ├── tavily-api/ — 타빌리 검색 스킬
- └── backup/ — 구버전 파일 보관
+    ├── code-edit.md — 서버 파일 수정 워크플로우 (Claude 컨펌 필수)
+    ├── web-search.md — 웹 검색 API
+    ├── novel-brain.md — 소설 보조작가
+    ├── amazon-server.md — 아마존 서버 정보
+    ├── github-workflow.md — GitHub 배포 워크플로우
+    ├── github-pull.sh — GitHub → 맥북 (서버 코드)
+    ├── github-push.sh — 맥북 → GitHub (서버 코드)
+    ├── agent-pull.sh — GitHub → 맥북 (메모리 파일)
+    ├── agent-push.sh — 맥북 → GitHub (메모리 파일)
+    ├── deploy.sh — GitHub → 서버 배포 (Claude 컨펌 후에만)
+    ├── send_to_telegram.py — 텔레그램 파일 전송
+    ├── tavily-api/ — 타빌리 검색 스킬
+    └── backup/ — 구버전 파일 보관
 ```
 
 ---
