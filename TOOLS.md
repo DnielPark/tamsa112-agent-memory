@@ -59,11 +59,11 @@ python3 ~/.openclaw/workspace/skills/send_to_telegram.py MEMORY.md TOOLS.md
 ### GitHub 워크플로우 (항상 이 순서)
 ```bash
 cd ~/.openclaw/workspace/skills
-./github-pull.sh          # 1. 작업 시작 전
+./server-pull.sh          # 1. 작업 시작 전
 # 코드 수정               # 2. github-workspace/ 안에서
-./github-push.sh "설명"   # 3. 수정 완료 후
+./server-push.sh "설명"   # 3. 수정 완료 후
 # Claude 컨펌             # 4. 대니얼이 코드 공유 → Claude 검토
-./deploy.sh               # 5. 컨펌 후 배포
+./server-deploy.sh        # 5. 컨펌 후 배포
 ```
 
 ### 아마존 서버 SSH 접속
