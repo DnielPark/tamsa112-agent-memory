@@ -84,8 +84,10 @@ ssh -i ~/.ssh/my-key1.pem admin@43.200.251.19 \
  ├── novel-brain.md — 소설 보조작가
  ├── amazon-server.md — 아마존 서버 정보
  ├── github-workflow.md — GitHub 배포 워크플로우
- ├── github-pull.sh — GitHub → 맥북
- ├── github-push.sh — 맥북 → GitHub
+ ├── github-pull.sh — GitHub → 맥북 (서버 코드)
+ ├── github-push.sh — 맥북 → GitHub (서버 코드)
+ ├── agent-pull.sh — GitHub → 맥북 (메모리 파일)
+ ├── agent-push.sh — 맥북 → GitHub (메모리 파일)
  ├── deploy.sh — GitHub → 서버 배포
  ├── send_to_telegram.py — 텔레그램 파일 전송
  ├── tavily-api/ — 타빌리 검색 스킬
