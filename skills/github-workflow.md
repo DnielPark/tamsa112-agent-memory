@@ -122,11 +122,11 @@ cp ~/.openclaw/workspace/github-workspace/novel/editor.html.backup \
 
 | 스크립트 | 용도 | 실행 주체 |
 |---|---|---|
-| github-pull.sh | 서버 코드 다운로드 (GitHub → 맥북) | 미르 |
-| github-push.sh | 서버 코드 업로드 (맥북 → GitHub) | 미르 |
+| server-pull.sh | 서버 코드 다운로드 (GitHub → 맥북) | 미르 |
+| server-push.sh | 서버 코드 업로드 (맥북 → GitHub) | 미르 |
 | agent-pull.sh | 스킬 파일 다운로드 (GitHub → 맥북) | 미르 |
 | agent-push.sh | 스킬 파일 업로드 (맥북 → GitHub) | 사용 안 함 (대니얼이 직접 업로드) |
-| deploy.sh | 서버 배포 (GitHub → 서버, curl 방식) | 미르 (Claude 컨펌 후에만) |
+| server-deploy.sh | 서버 배포 (GitHub → 서버, curl 방식) | 미르 (Claude 컨펌 후에만) |
 
 ---
 
