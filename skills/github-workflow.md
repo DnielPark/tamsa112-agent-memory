@@ -40,8 +40,14 @@ GitHub에서 최신 파일을 맥북으로 다운로드.
 
 ### 3단계 — GitHub에 올리기
 cd ~/.openclaw/workspace/skills
+
+# 서버 코드 업로드 (비공개 레포)
 ./github-push.sh "작업 내용 설명"
 커밋 메시지 예시: "editor.css 헤더 높이 수정", "file-api.js 업로드 버그 수정"
+
+# 에이전트 메모리 업로드 (공개 레포)
+./agent-push.sh "메모리 업데이트 - 작업 내용"
+커밋 메시지 예시: "MEMORY.md 업데이트", "TOOLS.md 스킬 추가"
 
 ### 4단계 — 서버 배포
 ./deploy.sh
@@ -105,6 +111,28 @@ cp ~/.openclaw/workspace/github-workspace/novel/editor.html.backup \
 | 기능 설계 / 지시문 작성 | Claude |
 | 코드 수정 / 스크립트 실행 / 배포 | 미르 |
 | 검수 / 최종 승인 | 대니얼 |
+
+## 📁 레포지토리 분리
+
+### tamsa112-novel-editor (비공개)
+- 서버 배포 파일만 저장
+- 경로: `novel/`, `nodeapp/`
+- 용도: 서버 코드 버전 관리
+
+### tamsa112-agent-memory (공개)
+- 에이전트 메모리 파일 저장
+- 파일: `MEMORY.md`, `TOOLS.md`, `skills/`
+- 용도: Claude 참조, 문서 공유
+
+## 🛠️ 스크립트 요약
+
+| 스크립트 | 용도 | 레포지토리 |
+|---|---|---|
+| `github-pull.sh` | 서버 코드 다운로드 | 비공개 |
+| `github-push.sh` | 서버 코드 업로드 | 비공개 |
+| `agent-pull.sh` | 메모리 파일 다운로드 | 공개 |
+| `agent-push.sh` | 메모리 파일 업로드 | 공개 |
+| `deploy.sh` | 서버 배포 | 비공개 → 서버 |
 
 ---
 
