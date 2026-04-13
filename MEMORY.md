@@ -106,5 +106,12 @@ agent-push.sh는 더 이상 미르가 실행하지 않음.
 - 변경 전: wget → 비공개 레포 인증 불가로 실패
 - 변경 후: curl + Authorization: token 헤더 방식
 - 이유: curl이 비공개 레포 인증에 적합
+
+## 스크립트 이름 변경 (2026-04-13)
+
+- github-pull.sh → server-pull.sh
+- github-push.sh → server-push.sh (MD 스캔 버그 동시 수정)
+- deploy.sh → server-deploy.sh
+- 이유: agent-* 와 server-* 로 레포 구분을 명확히 하기 위함
 - 
 **이 파일은 정기적으로 업데이트하세요. 중요한 결정과 학습 내용을 기록하여 세션 간 지속성을 유지합니다.** 🐾
