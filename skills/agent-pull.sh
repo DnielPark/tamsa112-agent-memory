@@ -13,7 +13,6 @@ RAW_BASE="https://raw.githubusercontent.com/$REPO/$BRANCH"
 
 # 다운로드 대상 파일 목록
 declare -a FILES_TO_DOWNLOAD=(
-    "MEMORY.md"
     "TOOLS.md"
 )
 
