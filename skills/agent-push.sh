@@ -23,14 +23,12 @@ fi
 LOCAL_FILES=(
     "$HOME/.openclaw/workspace/AGENTS.md"
     "$HOME/.openclaw/workspace/HEARTBEAT.md"
-    "$HOME/.openclaw/workspace/MEMORY.md"
     "$HOME/.openclaw/workspace/TOOLS.md"
 )
 
 GITHUB_PATHS=(
     "AGENTS.md"
     "HEARTBEAT.md"
-    "MEMORY.md"
     "TOOLS.md"
 )
 
