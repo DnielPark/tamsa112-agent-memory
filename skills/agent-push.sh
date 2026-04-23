@@ -21,11 +21,13 @@ fi
 # 업로드 대상 파일 목록 (로컬 경로 → GitHub 경로)
 # macOS bash 3.2 호환을 위해 배열 2개 사용
 LOCAL_FILES=(
+    "$HOME/.openclaw/workspace/AGENTS.md"
     "$HOME/.openclaw/workspace/MEMORY.md"
     "$HOME/.openclaw/workspace/TOOLS.md"
 )
 
 GITHUB_PATHS=(
+    "AGENTS.md"
     "MEMORY.md"
     "TOOLS.md"
 )
