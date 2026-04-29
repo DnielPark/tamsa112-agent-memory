@@ -60,3 +60,33 @@
 3. **수정 요청 시 유형 명시**
    - "품셈에..." / "실정보고에..." / "일위대가에..."
    - 유형을 명시하지 않으면 물어볼 것
+
+---
+
+# Civil Cost Manager 프로젝트
+
+## 기본 정보
+- **GitHub**: https://github.com/DnielPark/civil-cost-manager (공개)
+- **로컬**: `~/.openclaw/workspace/civil-cost-manager/`
+- **기술 스택**: Flask + SQLite3 + HTML/CSS/JS + openpyxl + pandas
+- **포트**: 8080 (5000번 AirPlay 충돌 회피)
+
+## 스크립트
+
+```bash
+# GitHub → 맥북 (최신 코드 가져오기)
+cd ~/.openclaw/workspace/skills
+./cost-manager-pull.sh
+
+# 맥북 → GitHub (변경사항 푸시)
+cd ~/.openclaw/workspace/skills
+./cost-manager-push.sh "커밋 메시지"
+```
+
+## 서버 실행/중지
+
+```bash
+cd ~/.openclaw/workspace/skills
+./cost-manager-app-on.sh    # 서버 시작 (http://localhost:8080)
+./cost-manager-app-off.sh   # 서버 중지
+```
